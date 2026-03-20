@@ -1,0 +1,576 @@
+/* ============================================
+        GLOBAL STYLES
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+        }
+
+        /* ============================================
+        PAGE 1 - WELCOME CARD
+           ============================================ */
+        .page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
+            z-index: 1;
+        }
+
+        .page.hidden {
+            opacity: 0;
+            visibility: hidden;
+            z-index: 0;
+        }
+
+        #page1 {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 60px 50px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            animation: slideIn 0.8s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card-title {
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .card-message {
+            font-size: 1.1em;
+            color: #666;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1em;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+        }
+
+        .btn:active {
+            transform: translateY(-1px);
+        }
+
+        .shuffle-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            padding: 12px 20px;
+            font-size: 0.95em;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            z-index: 20;
+            backdrop-filter: blur(10px);
+        }
+
+        .shuffle-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .shuffle-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* ============================================
+            PAGE 2 - SURPRISE PAGE
+           ============================================ */
+        #page2 {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+        }
+
+        .surprise-text {
+            font-size: 4em;
+            color: white;
+            font-weight: 700;
+            text-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            opacity: 1;
+            animation: oopsDisappear 1s ease-out 6s forwards;
+        }
+
+        @keyframes oopsDisappear {
+            0% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            100% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+        }
+
+        /* ============================================
+            FLOATING MESSAGES ANIMATION
+           ============================================ */
+        .message {
+            position: fixed;
+            font-size: 1.5em;
+            font-weight: 700;
+            color: white;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 20px 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            pointer-events: auto;
+            animation: messageAppear 0.6s ease-out forwards;
+            z-index: 10;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .message:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(1.05);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes messageAppear {
+            0% {
+                opacity: 0;
+                transform: scale(0.3) rotate(0deg);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(var(--rotation));
+            }
+        }
+
+        /* ============================================
+            CONFETTI ANIMATION
+           ============================================ */
+        .confetti {
+            position: fixed;
+            pointer-events: none;
+            animation: confettiFall 2s ease-out forwards;
+            z-index: 5;
+        }
+
+        @keyframes confettiFall {
+            0% {
+                opacity: 1;
+                transform: translateY(0) rotateZ(0deg);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(300px) rotateZ(360deg);
+            }
+        }
+
+        /* ============================================
+           MESSAGE DETAIL MODAL
+           ============================================ */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 50px 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            animation: modalSlideIn 0.4s ease-out;
+            position: relative;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .modal-message {
+            font-size: 2.5em;
+            color: #333;
+            margin: 40px 0;
+            font-weight: 700;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(102, 126, 234, 0.1);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.5em;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-close:hover {
+            background: rgba(102, 126, 234, 0.2);
+            transform: rotate(90deg);
+        }
+
+        .modal-text {
+            font-size: 1.1em;
+            color: #666;
+            margin: 20px 0;
+            line-height: 1.6;
+        }
+
+        .modal-description {
+            font-size: 1em;
+            color: #888;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 2px solid rgba(102, 126, 234, 0.2);
+            line-height: 1.6;
+        }
+
+        /* ============================================
+        CREATOR TAG
+           ============================================ */
+        .creator-tag {
+            position: fixed;
+            bottom: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            z-index: 25;
+        }
+
+        /* ============================================
+            RESPONSIVE DESIGN
+           ============================================ */
+        /* TABLETS (600px - 768px) */
+        @media (max-width: 768px) {
+            body {
+                overflow-y: auto;
+            }
+
+            .card {
+                padding: 50px 35px;
+                max-width: 90%;
+                margin: 20px;
+            }
+
+            .card-title {
+                font-size: 2em;
+                margin-bottom: 20px;
+            }
+
+            .card-message {
+                font-size: 1.05em;
+                margin-bottom: 35px;
+            }
+
+            .btn {
+                padding: 12px 35px;
+                font-size: 1em;
+            }
+
+            .surprise-text {
+                font-size: 3em;
+                padding: 0 20px;
+            }
+
+            .message {
+                font-size: 1.25em;
+                padding: 15px 25px;
+                max-width: 90vw;
+            }
+
+            .modal-content {
+                padding: 40px 30px;
+                max-width: 85%;
+                margin: 20px;
+            }
+
+            .modal-message {
+                font-size: 2.2em;
+            }
+
+            .modal-text {
+                font-size: 1.05em;
+            }
+
+            .shuffle-btn {
+                top: 15px;
+                right: 15px;
+                padding: 10px 18px;
+                font-size: 0.9em;
+            }
+
+            .creator-tag {
+                font-size: 0.8em;
+                padding: 7px 12px;
+            }
+        }
+
+        /* MOBILE PHONES (max-width: 599px) */
+        @media (max-width: 599px) {
+            body {
+                overflow-y: auto;
+                height: auto;
+                min-height: 100vh;
+            }
+
+            .page {
+                position: relative;
+                height: auto;
+                min-height: 100vh;
+                padding: 40px 20px;
+            }
+
+            .card {
+                padding: 35px 25px;
+                max-width: 100%;
+                width: 100%;
+                margin: 0;
+                border-radius: 15px;
+            }
+
+            .card-title {
+                font-size: 1.6em;
+                margin-bottom: 15px;
+            }
+
+            .card-message {
+                font-size: 0.95em;
+                margin-bottom: 30px;
+                line-height: 1.5;
+            }
+
+            .btn {
+                padding: 12px 30px;
+                font-size: 1em;
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .btn:hover {
+                transform: translateY(-2px);
+            }
+
+            .surprise-text {
+                font-size: 2em;
+                padding: 0 15px;
+                margin-top: 40px;
+            }
+
+            .message {
+                font-size: 1em;
+                padding: 12px 20px;
+                max-width: 80vw;
+                border-radius: 10px;
+            }
+
+            .message:hover {
+                transform: scale(1.03);
+            }
+
+            .modal {
+                position: fixed;
+                padding: 20px;
+            }
+
+            .modal-content {
+                padding: 30px 20px;
+                max-width: 95%;
+                width: 100%;
+                border-radius: 15px;
+            }
+
+            .modal-message {
+                font-size: 1.5em;
+                margin: 30px 0;
+            }
+
+            .modal-text {
+                font-size: 0.95em;
+            }
+
+            .modal-description {
+                font-size: 0.9em;
+                margin-top: 20px;
+                padding-top: 15px;
+            }
+
+            .modal-close {
+                width: 38px;
+                height: 38px;
+                font-size: 1.3em;
+            }
+
+            .shuffle-btn {
+                top: 12px;
+                right: 12px;
+                padding: 10px 16px;
+                font-size: 0.85em;
+                background: rgba(255, 255, 255, 0.25);
+            }
+
+            .creator-tag {
+                bottom: 12px;
+                right: 12px;
+                font-size: 0.75em;
+                padding: 6px 12px;
+            }
+
+            .confetti {
+                animation: confettiFallMobile 2s ease-out forwards;
+            }
+
+            @keyframes confettiFallMobile {
+                0% {
+                    opacity: 1;
+                    transform: translateY(0) rotateZ(0deg);
+                }
+
+                100% {
+                    opacity: 0;
+                    transform: translateY(200px) rotateZ(360deg);
+                }
+            }
+        }
+
+        /* VERY SMALL PHONES (max-width: 380px) */
+        @media (max-width: 380px) {
+            .card {
+                padding: 25px 15px;
+            }
+
+            .card-title {
+                font-size: 1.4em;
+                margin-bottom: 12px;
+            }
+
+            .card-message {
+                font-size: 0.9em;
+                margin-bottom: 20px;
+            }
+
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.95em;
+            }
+
+            .surprise-text {
+                font-size: 1.6em;
+                margin-top: 30px;
+            }
+
+            .message {
+                font-size: 0.9em;
+                padding: 10px 15px;
+            }
+
+            .modal-content {
+                padding: 20px 15px;
+            }
+
+            .modal-message {
+                font-size: 1.3em;
+                margin: 20px 0;
+            }
+
+            .shuffle-btn {
+                padding: 8px 12px;
+                font-size: 0.8em;
+            }
+
+            .creator-tag {
+                font-size: 0.7em;
+            }
+        }

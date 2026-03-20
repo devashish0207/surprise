@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dishuuuuuuu : surprise-gift</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <div class="creator-tag" id="creatorTag"></div>
+    <!-- ========================================
+        PAGE 1 - WELCOME CARD
+        ========================================= -->
+    <div id="page1" class="page">
+        <div class="card">
+            <h1 class="card-title" id="cardTitle">🎁 Special Gift</h1>
+            <p class="card-message" id="cardMessage">You have been selected to receive an exclusive gift. Click the
+                button below to unlock your surprise!</p>
+            <button class="btn" id="unlockBtn">Unlock Your Gift</button>
+        </div>
+    </div>
+
+    <!-- ========================================
+        PAGE 2 - SURPRISE PAGE
+        ======================================== -->
+    <div id="page2" class="page hidden">
+        <div class="surprise-text">Oops...😂😂</div>
+        <button class="shuffle-btn" id="shuffleBtn">🔀 Shuffle</button>
+    </div>
+
+    <!-- ========================================
+        MESSAGE DETAIL MODAL
+        ======================================== -->
+    <div id="messageModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">✕</button>
+            <div class="modal-message" id="modalMessageText"></div>
+            <div class="modal-description" id="modalMessageDescription"></div>
+        </div>
+    </div>
+
+    <!-- ========================================
+        AUDIO ELEMENTS
+        ======================================== -->
+    <audio id="bgMusic" loop>
+        <source src="Khat - 320Kbps-(Mr-Jat.in).mp3" type="audio/mp3">
+    </audio>
+    <!-- <audio id="confettiSound">
+        <source src="the-vampires-monster-male-curiously-saying-surprise-319528.mp3" type="audio/mp3">
+    </audio> -->
+
+    <script src="app.js"></script>
+
+</body>
+
+</html>
